@@ -1,7 +1,14 @@
 <div>
   <button (click)="generatePDF()">Exportar como PDF</button>
-    <br>
 </div>
+
+<br>
+
+<div *ngIf="erroCarregamento" class="error-message">
+  <p>Erro ao carregar o histórico. Verifique a conexão com o servidor e tente novamente.</p>  
+</div>
+
+<br>
 
 <div id="history-container" class="history-container">
     <table mat-table [dataSource]="historico" class="mat-elevation-z8" *ngIf="historico.length > 0">

@@ -15,6 +15,7 @@ export class HistoricoComponent implements OnInit {
   historico: any[] = [];
   usuario: string = '';
   displayedColumns: string[] = ['usuario', 'nomeFilme', 'anoFilme'];
+  erroCarregamento: boolean = true; 
 
   ngOnInit() {
     this.carregarHistorico();
@@ -22,11 +23,20 @@ export class HistoricoComponent implements OnInit {
 
   carregarHistorico() {
     fetch('http://127.0.0.1:8000/history')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erro na resposta do servidor');
+        }
+        return response.json();
+      })
       .then(data => {
         this.historico = data;
+        this.erroCarregamento = false; // Resetar o erro se o carregamento for bem-sucedido
       })
-      .catch(error => console.error('Erro ao carregar histórico:', error));
+      .catch(error => {
+        console.error('Erro ao carregar histórico:', error);
+        this.erroCarregamento = true; // Marcar como erro se falhar
+      });
   }
 
   extrairAno(timestamp: string): string {
