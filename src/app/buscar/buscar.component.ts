@@ -15,24 +15,32 @@ import { FormsModule } from '@angular/forms';
 export class BuscarComponent {
   usuario: string = '';
   filme: string = '';
-  resultado: string | null = null;
+  resultado: any = null;
+  erroCarregamento: boolean = false;
+  carregando: boolean = false; 
 
   buscarFilme() {
+    this.carregando = true;
+    this.resultado = null;
+    this.erroCarregamento = false;
+
     const url = `http://127.0.0.1:8000/movies?user=${this.usuario}&title=${encodeURIComponent(this.filme)}`;
-    
-    // Usando fetch para fazer a requisição HTTP
+
     fetch(url)
       .then(response => {
         if (!response.ok) {
-          throw new Error('Erro na requisição');
+          throw new Error('Erro na resposta do servidor');
         }
-        return response.text(); // ou `response.json()` se o backend retornar JSON
+        return response.json();
       })
       .then(data => {
-        this.resultado = data;
+        this.resultado = data[0];
+        this.carregando = false;
       })
       .catch(error => {
         console.error('Erro na busca:', error);
+        this.erroCarregamento = true;
+        this.carregando = false;
       });
   }
 }

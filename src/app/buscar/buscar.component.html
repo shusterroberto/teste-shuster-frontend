@@ -1,18 +1,55 @@
 <div class="search-container">
-    <mat-form-field appearance="fill">
-      <mat-label>Usuário</mat-label>
-      <input matInput [(ngModel)]="usuario" />
-    </mat-form-field>
-  
-    <mat-form-field appearance="fill">
-      <mat-label>Filme</mat-label>
-      <input matInput [(ngModel)]="filme" />
-    </mat-form-field>
-  
-    <button mat-raised-button color="primary" (click)="buscarFilme()">Buscar</button>
-  
-    <div *ngIf="resultado">
-      <p><strong>Resultado:</strong> {{ resultado }}</p>
-    </div>
+  <mat-form-field appearance="fill">
+    <mat-label>Usuário</mat-label>
+    <input matInput [(ngModel)]="usuario" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Filme</mat-label>
+    <input matInput [(ngModel)]="filme" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="buscarFilme()">Buscar</button>
+
+  <div *ngIf="erroCarregamento" class="error-message">
+    <p>Erro ao carregar os dados. Tente novamente.</p>
   </div>
-  
+
+  <div *ngIf="resultado" class="result-container">
+    <h3>Resultado:</h3>
+    <table mat-table class="result-table">
+      <tr>
+        <th>ID</th>
+        <td>{{ resultado._id }}</td>
+      </tr>
+      <tr>
+        <th>Nome</th>
+        <td>{{ resultado.name }}</td>
+      </tr>
+      <tr>
+        <th>Tempo de Execução (min)</th>
+        <td>{{ resultado.runtimeInMinutes }}</td>
+      </tr>
+      <tr>
+        <th>Orçamento (Milhões)</th>
+        <td>{{ resultado.budgetInMillions }}</td>
+      </tr>
+      <tr>
+        <th>Bilheteria (Milhões)</th>
+        <td>{{ resultado.boxOfficeRevenueInMillions }}</td>
+      </tr>
+      <tr>
+        <th>Indicações ao Oscar</th>
+        <td>{{ resultado.academyAwardNominations }}</td>
+      </tr>
+      <tr>
+        <th>Vitórias no Oscar</th>
+        <td>{{ resultado.academyAwardWins }}</td>
+      </tr>
+      <tr>
+        <th>Nota Rotten Tomatoes</th>
+        <td>{{ resultado.rottenTomatoesScore }}</td>
+      </tr>
+    </table>
+  </div>
+</div>

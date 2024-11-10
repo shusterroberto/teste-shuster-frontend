@@ -31,11 +31,11 @@ export class HistoricoComponent implements OnInit {
       })
       .then(data => {
         this.historico = data;
-        this.erroCarregamento = false; // Resetar o erro se o carregamento for bem-sucedido
+        this.erroCarregamento = false;
       })
       .catch(error => {
         console.error('Erro ao carregar histórico:', error);
-        this.erroCarregamento = true; // Marcar como erro se falhar
+        this.erroCarregamento = true;
       });
   }
 
@@ -44,33 +44,10 @@ export class HistoricoComponent implements OnInit {
     return date.getFullYear().toString();
   }
 
-  exportAsPDF() {
-    const content = document.getElementById('history-container') as HTMLElement;
-  
-    if (!content) {
-      console.error("Elemento 'history-container' não encontrado!");
-      return;
-    }
-  
-    html2canvas(content).then(canvas => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'px',
-        format: [canvas.width, canvas.height]
-      });
-  
-      pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
-      pdf.save('pagina-exportada.pdf');
-    }).catch(error => {
-      console.error("Erro ao capturar o conteúdo:", error);
-    });
-  }
-
   generatePDF() {
-    const element = document.getElementById('history-container'); // Substitua pelo ID do elemento desejado
+    const element = document.getElementById('history-container');
   
-    if (element) { // Verifica se o elemento não é nulo
+    if (element) { 
       html2canvas(element, { scale: 2 }).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
         const pdf = new jsPDF('p', 'mm', 'a4');
