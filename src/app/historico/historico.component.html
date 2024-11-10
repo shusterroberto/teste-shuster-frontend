@@ -1,8 +1,13 @@
-<div class="history-container">
+<div>
+  <button (click)="generatePDF()">Exportar como PDF</button>
+    <br>
+</div>
+
+<div id="history-container" class="history-container">
     <table mat-table [dataSource]="historico" class="mat-elevation-z8" *ngIf="historico.length > 0">
       <ng-container matColumnDef="usuario">
         <th mat-header-cell *matHeaderCellDef> Usuário </th>
-        <td mat-cell *matCellDef="let item"> {{ usuario }} </td>
+        <td mat-cell *matCellDef="let item"> {{ item.user }} </td>
       </ng-container>
   
       <ng-container matColumnDef="nomeFilme">
