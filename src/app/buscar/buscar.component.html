@@ -1,0 +1,18 @@
+<div class="search-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Usuário</mat-label>
+      <input matInput [(ngModel)]="usuario" />
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Filme</mat-label>
+      <input matInput [(ngModel)]="filme" />
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" (click)="buscarFilme()">Buscar</button>
+  
+    <div *ngIf="resultado">
+      <p><strong>Resultado:</strong> {{ resultado }}</p>
+    </div>
+  </div>
+  

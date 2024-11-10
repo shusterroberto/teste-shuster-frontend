@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { MatTabsModule } from '@angular/material/tabs';
+import { HistoricoComponent } from './historico/historico.component';
+import { BuscarComponent } from './buscar/buscar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [
+    MatTabsModule, 
+    BuscarComponent, 
+    HistoricoComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'teste-shuster-frontend';
-}
+export class AppComponent {}

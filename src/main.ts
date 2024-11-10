@@ -1,6 +1,15 @@
+import { enableProdMode } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
+import { environment } from './environments/environment';
+import { provideAnimations } from '@angular/platform-browser/animations'; // Importa o provideAnimations
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+if (environment.production) {
+  enableProdMode();
+}
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideAnimations(), // Inclua a provisão de animações aqui
+  ]
+}).catch((err) => console.error(err));
